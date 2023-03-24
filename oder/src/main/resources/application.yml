@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: inventory
+    name: oder
 ---
 
 spring:
@@ -27,7 +27,7 @@ spring:
                   serde: org.apache.kafka.common.serialization.Serdes$StringSerde
       bindings:
         event-in:
-          group: inventory
+          group: oder
           destination: labshopoauthkeycloak
           contentType: application/json
         event-out:
@@ -39,9 +39,12 @@ logging:
     org.hibernate.type: trace
     org.springframework.cloud: debug
 
+api:
+  url: localhost:8082
+
 
 server:
-  port: 8082
+  port: 8081
 
 ---
 
@@ -62,11 +65,14 @@ spring:
                   serde: org.apache.kafka.common.serialization.Serdes$StringSerde
       bindings:
         event-in:
-          group: inventory
+          group: oder
           destination: labshopoauthkeycloak
           contentType: application/json
         event-out:
           destination: labshopoauthkeycloak
           contentType: application/json
+
+api:
+  url: inventory:8080
 
 
